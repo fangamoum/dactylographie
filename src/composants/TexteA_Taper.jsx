@@ -7,7 +7,7 @@ function TexteA_Taper({texte, motsSaisis}){
     return(
         <p>
             {mots.map((mot , index)=> {
-                let couleur = "" ; 
+                let couleur = "black" ; 
 
                 if(index < motsSaisis.length){
                     couleur = motsSaisis[index] === mot ? "green" : "red";
