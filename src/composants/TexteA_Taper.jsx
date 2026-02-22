@@ -1,5 +1,5 @@
 
-function TexteA_Taper({texte, motsSaisis}){
+function TexteA_Taper({texte, motsSaisis , motCourantIndex}){
     // on decoupe le texte en mots
 
     const mots = texte.split(" ");
@@ -7,14 +7,17 @@ function TexteA_Taper({texte, motsSaisis}){
     return(
         <p>
             {mots.map((mot , index)=> {
-                let couleur = "black" ; 
+                let classe = "" ; 
 
                 if(index < motsSaisis.length){
-                    couleur = motsSaisis[index] === mot ? "green" : "red";
+                    classe = motsSaisis[index] === mot ? "correct" : "incorrect";
+                }
+                else if(index === motCourantIndex){
+                    classe = "current"; // mot courant
                 }
 
                 return(
-                    <span key={index} style = {{color:couleur}}>
+                    <span key={index} className = {classe}>
                         {mot}{" "}
                     </span>
                 );
