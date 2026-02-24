@@ -1,29 +1,30 @@
+import { useContext } from "react";
+import { GameContext } from "../context/GameContext";
 
-function TexteA_Taper({texte, motsSaisis , motCourantIndex}){
-    // on decoupe le texte en mots
+function TexteA_Taper() {
+  const { state } = useContext(GameContext);
 
-    const mots = texte.split(" ");
+  const mots = state.texteATaper.split(" ");
 
-    return(
-        <p>
-            {mots.map((mot , index)=> {
-                let classe = "" ; 
+  return (
+    <p>
+      {mots.map((mot, index) => {
+        let classe = "";
 
-                if(index < motsSaisis.length){
-                    classe = motsSaisis[index] === mot ? "correct" : "incorrect";
-                }
-                else if(index === motCourantIndex){
-                    classe = "current"; // mot courant
-                }
+        if (index < state.motsSaisis.length) {
+          classe = state.motsSaisis[index] === mot ? "correct" : "incorrect";
+        } else if (index === state.motCourantIndex) {
+          classe = "current"; // mot courant
+        }
 
-                return(
-                    <span key={index} className = {classe}>
-                        {mot}{" "}
-                    </span>
-                );
-            })}
-        </p>
-    );
+        return (
+          <span key={index} className={classe}>
+            {mot}{" "}
+          </span>
+        );
+      })}
+    </p>
+  );
 }
 
 export default TexteA_Taper;

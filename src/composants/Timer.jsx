@@ -1,24 +1,22 @@
-import { useEffect } from "react";
+import { useEffect , useContext} from "react";
+import { GameContext , ACTIONS } from "../context/GameContext";
 
-function Timer({tempsRestant , setTempsRestant , partieActive, setPartieActive}){
-  
+function Timer(){
+   const {state , dispatch} = useContext(GameContext);
+
     useEffect(()=>{
-        if(!partieActive) return ;
+    
+        if(!state.partieActive) return ;
 
-        const timer = setInterval(()=>{
-            setTempsRestant((prev) =>{
-                if(prev <= 1){
-                    setPartieActive(false);
-                    return 0;
-                }
-                return prev -1;
-            });
-            
+        const interval = setInterval(()=>{
+             dispatch({type: ACTIONS.TICK});
         } , 1000);
-        return () => clearInterval(timer);
-    } , [partieActive , setTempsRestant , setPartieActive]);
 
-     return <p style={{color: "black"}} >Temps restant : {tempsRestant} secondes</p>
+        //clearnup a chaque rendu ou fin de partie
+        return () => clearInterval(interval);
+    } , [state.partieActive , dispatch]);
+
+     return <p style={{color: "black"}} >Temps restant : {state.tempsRestant} secondes</p>
 }
 
 export default Timer;

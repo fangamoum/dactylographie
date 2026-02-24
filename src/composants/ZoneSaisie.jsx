@@ -1,28 +1,33 @@
-function ZoneSaisie({ valeurSaisie, setValeurSaisie, motsSaisis, setMotsSaisis , motCourantIndex , setMotCourantIndex , partieActive , setPartieActive }) {
-    const gestionTouche = (e) => {
-        if (e.key === " ") {
-            e.preventDefault();
-            setMotsSaisis([...motsSaisis, valeurSaisie]); 
-            setValeurSaisie("");
-            setMotCourantIndex(motCourantIndex + 1); // mot suivant
-        }
-        else if(!partieActive && e.target.value.length > 0){
-              setPartieActive(true); // demarre la partie au premier caractere
-        }
-    };
+import { useContext } from "react";
+import { GameContext, ACTIONS } from "../context/GameContext";
 
-    return (
-        <input
-            type="text"
-            value={valeurSaisie}
-            onChange={(e) => setValeurSaisie(e.target.value)}
-            onKeyDown={gestionTouche}
-            placeholder="Taper ici..."
-            autoFocus
-            disabled={!partieActive && motsSaisis.length > 0} // bloqué si la partie est terminée
-            style={{ width: "100%", fontSize: "18px", padding: "10px", marginTop: "10px" }}
-        />
-    );
+function ZoneSaisie() {
+  const { state, dispatch } = useContext(GameContext);
+
+  const gestionTouche = (e) => {
+    if (!state.partieActive && e.key.length === 1) {
+      dispatch({ type: ACTIONS.START_PARTIE });
+    }
+
+    if (e.key === " ") {
+      e.preventDefault();
+      dispatch({ type: ACTIONS.SAISIR_MOT });
+    }
+  };
+
+  return (
+    <input
+      type="text"
+      value={state.valeurSaisie}
+      onChange={(e) =>
+        dispatch({ type: ACTIONS.UPDATE_VALEUR, payload: e.target.value })
+      }
+      onKeyDown={gestionTouche}
+      placeholder="Taper ici..."
+      autoFocus
+      style={{ width: "100%", fontSize: "18px", padding: "10px", marginTop: "10px" }}
+    />
+  );
 }
 
 export default ZoneSaisie;

@@ -81,3 +81,13 @@ button:hover {
   border-radius: 4px;
   padding: 2px 4px;
 }
+
+.historique {
+    margin-top: 20px;
+    border-top: 2px solid #ccc;
+    padding-top: 10px;
+}
+
+.historique li {
+    margin-bottom: 10px;
+}
