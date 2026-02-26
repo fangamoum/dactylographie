@@ -1,93 +1,107 @@
-/* App.css */
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f5f5;
+/* Reset simple */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-div {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #4e73df, #1cc88a);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Carte principale */
+.app-container {
+  background: white;
+  width: 700px;
+  max-width: 95%;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Titre */
 h1 {
   text-align: center;
-  color: #333333;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Timer */
+.timer {
+  font-size: 18px;
+  font-weight: bold;
   margin-bottom: 20px;
+  color: #e74a3b;
+  text-align: right;
 }
 
-p {
-  font-size: 18px;
+/* Texte à taper */
+.text-zone {
+  font-size: 20px;
   line-height: 1.6;
-  color: #000000;
+  margin-bottom: 20px;
+  min-height: 80px;
 }
 
-span {
-  font-size: 18px;
+/* Mot courant */
+.current {
+  background-color: #fff3b0;
   padding: 2px 4px;
   border-radius: 4px;
 }
 
-input[type="text"] {
+/* Lettres correctes */
+.correct {
+  color: #1cc88a;
+}
+
+/* Lettres incorrectes */
+.incorrect {
+  color: #e74a3b;
+}
+
+/* Input */
+input {
   width: 100%;
-  padding: 10px 15px;
   font-size: 18px;
-  margin-top: 15px;
-  border: 2px solid #cccccc;
+  padding: 12px;
   border-radius: 8px;
+  border: 2px solid #ddd;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  border-color: #4e73df;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-input[type="text"]:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+/* Récap */
+.recap {
+  margin-top: 20px;
 }
 
-button {
-  padding: 10px 20px;
+.recap p {
+  margin: 8px 0;
   font-size: 16px;
-  background-color: #007bff;
+}
+
+/* Bouton */
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #4e73df;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: 0.2s ease;
 }
 
 button:hover {
-  background-color: #0056b3;
-}
-
-/* Couleurs des mots */
-.correct {
-  color: green;
-  font-weight: bold;
-}
-
-.incorrect {
-  color: red;
-  font-weight: bold;
-}
-
-.current {
-  background-color: #ffeaa7; /* jaune clair pour mettre en évidence */
-  border-radius: 4px;
-  padding: 2px 4px;
-}
-
-.historique {
-    margin-top: 20px;
-    border-top: 2px solid #ccc;
-    padding-top: 10px;
-}
-
-.historique li {
-    margin-bottom: 10px;
+  background-color: #2e59d9;
 }

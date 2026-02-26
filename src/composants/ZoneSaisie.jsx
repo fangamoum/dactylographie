@@ -3,13 +3,15 @@ import { GameContext, ACTIONS } from "../context/GameContext";
 
 function ZoneSaisie() {
   const { state, dispatch } = useContext(GameContext);
-
+  
   const gestionTouche = (e) => {
+    // Démarre la partie au premier caractère
     if (!state.partieActive && e.key.length === 1) {
       dispatch({ type: ACTIONS.START_PARTIE });
     }
 
-    if (e.key === " ") {
+    // Validation du mot avec espace
+    if (e.key === " " && state.partieActive) {
       e.preventDefault();
       dispatch({ type: ACTIONS.SAISIR_MOT });
     }
@@ -25,7 +27,13 @@ function ZoneSaisie() {
       onKeyDown={gestionTouche}
       placeholder="Taper ici..."
       autoFocus
-      style={{ width: "100%", fontSize: "18px", padding: "10px", marginTop: "10px" }}
+      disabled={state.tempsRestant === 0}
+      style={{
+        width: "100%",
+        fontSize: "18px",
+        padding: "10px",
+        marginTop: "10px",
+      }}
     />
   );
 }

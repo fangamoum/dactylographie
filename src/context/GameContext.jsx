@@ -1,16 +1,18 @@
 import { createContext, useReducer } from "react";
 
-// état initial
+// État initial
 const initialState = {
-  texteATaper: "React est une bibliothèque JavaScript pour créer des interfaces utilisateur.",
+  texteATaper:
+    "React est une bibliothèque JavaScript pour créer des interfaces utilisateur.",
   valeurSaisie: "",
   motsSaisis: [],
   motCourantIndex: 0,
   tempsRestant: 30,
   partieActive: false,
+  nbErreurs: 0,
 };
 
-// actions possibles
+// Actions
 export const ACTIONS = {
   START_PARTIE: "start_partie",
   UPDATE_VALEUR: "update_valeur",
@@ -19,40 +21,53 @@ export const ACTIONS = {
   REJOUER: "rejouer",
 };
 
-// reducer
+// Reducer
 function gameReducer(state, action) {
   switch (action.type) {
     case ACTIONS.START_PARTIE:
       return { ...state, partieActive: true };
-      
+
     case ACTIONS.UPDATE_VALEUR:
       return { ...state, valeurSaisie: action.payload };
 
-    case ACTIONS.SAISIR_MOT:
+    case ACTIONS.SAISIR_MOT: {
+      const mots = state.texteATaper.split(" ");
+      const motAttendu = mots[state.motCourantIndex];
+
+      let erreurs = state.nbErreurs;
+      if (state.valeurSaisie !== motAttendu) {
+        erreurs += 1;
+      }
+
+      const nouveauIndex = state.motCourantIndex + 1;
+      const texteTermine = nouveauIndex >= mots.length;
+
       return {
         ...state,
         motsSaisis: [...state.motsSaisis, state.valeurSaisie],
         valeurSaisie: "",
-        motCourantIndex: state.motCourantIndex + 1,
+        motCourantIndex: nouveauIndex,
+        nbErreurs: erreurs,
+        partieActive: texteTermine ? false : state.partieActive,
       };
+    }
 
     case ACTIONS.TICK:
-      if (state.tempsRestant <= 0) {
-          return { ...state, partieActive: false , tempsRestant : 0 };
-      } 
+      if (state.tempsRestant <= 1) {
+        return { ...state, tempsRestant: 0, partieActive: false };
+      }
       return { ...state, tempsRestant: state.tempsRestant - 1 };
 
     case ACTIONS.REJOUER:
       return { ...initialState };
+
     default:
       return state;
   }
 }
 
-// création du context
 export const GameContext = createContext();
 
-// provider
 export function GameProvider({ children }) {
   const [state, dispatch] = useReducer(gameReducer, initialState);
 
