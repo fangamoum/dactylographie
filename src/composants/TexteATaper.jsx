@@ -27,7 +27,7 @@ function TexteATaper() {
             <span key={index} className="current">
               {mot.split("").map((lettre, i) => {
                 let classe = "";
-
+            
                 if (i < state.valeurSaisie.length) {
                   classe =
                     state.valeurSaisie[i] === lettre

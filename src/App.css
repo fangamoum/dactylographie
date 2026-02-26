@@ -46,6 +46,7 @@ h1 {
   line-height: 1.6;
   margin-bottom: 20px;
   min-height: 80px;
+  color: #090909;
 }
 
 /* Mot courant */
@@ -105,3 +106,4 @@ button {
 button:hover {
   background-color: #2e59d9;
 }
+
