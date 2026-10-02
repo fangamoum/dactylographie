@@ -1,7 +1,6 @@
 # Test de Dactylographie React
 
 ## Mamady Fangamou
-## Projet R4.A.10 - Complément web
 
 ## Description du projet
 
@@ -22,7 +21,7 @@ Le projet met en pratique :
  ```bash
    git clone https://github.com/fangamoum/dactylographie.git
 
-   cd projet-dactylographie
+   cd dactylographie
 
 ### Installer les dépendances
     npm install
